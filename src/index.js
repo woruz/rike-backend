@@ -16,6 +16,14 @@ connectDB();
 
 routes(app)
 
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    statusCode: 404,
+    message: "Endpoint not found",
+  });
+});
+
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
